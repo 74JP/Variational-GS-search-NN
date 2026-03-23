@@ -11,14 +11,18 @@ $\min_{\vec{\lambda}} \; \bra{f_{\vec{\lambda}}(\vec{r})} \hat{H} \ket{f_{\vec{\
 This seems exactly like a Machine Learning problem, and since Neural Networks are Universal Function approximators, they seem like the perfect candidates for our function forms.
 
 ## The Neural Network
-A wide and deep enough NN should be able to approximate any reasonable function, if anything at the cost of interpretability. Moreover, the training is easy enough. We introduce a physics and minimisation loss as:
+A wide and deep enough NN should be able to approximate any reasonable function, if anything at the cost of interpretability. Moreover, the training is easy enough. 
+The loss function is defined as:
 
-$\cal{L}(\vec{\lambda}) = \alpha* \cal{L}_E + \beta* \cal{L}_{norm} + \gamma*\cal{L}_{b.c.}$  
+$\mathcal{L}(\vec{\lambda}) = \alpha \mathcal{L}_E + \beta \mathcal{L}_{\text{norm}} + \gamma \mathcal{L}_{\text{b.c.}}$
 
-where
-$\cal{L}_E = \frac{|\bra{f_{\vec{\lambda}}(\vec{r})} \hat{H} \ket{f_{\vec{\lambda}}(\vec{r})}|^2}{|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}|^2}$ 
-$\cal{L}_{norm} = (|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}| -1)^2$
-$\cal{L}_{b.c.} = \frac{|f_{\vec{\lambda}}({\partial D})|^2}{|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}|}$
+where:
+
+$\mathcal{L}_E = \frac{\left|\langle f_{\vec{\lambda}}(\vec{r}) | \hat{H} | f_{\vec{\lambda}}(\vec{r}) \rangle\right|^2}{\left|\langle f_{\vec{\lambda}}(\vec{r}) | f_{\vec{\lambda}}(\vec{r}) \rangle\right|^2}$
+
+$\mathcal{L}_{\text{norm}} = \left(\left|\langle f_{\vec{\lambda}}(\vec{r}) | f_{\vec{\lambda}}(\vec{r}) \rangle\right| - 1\right)^2$
+
+$\mathcal{L}_{\text{b.c.}} = \frac{\left|f_{\vec{\lambda}}(\partial D)\right|^2}{\left|\langle f_{\vec{\lambda}}(\vec{r}) | f_{\vec{\lambda}}(\vec{r}) \rangle\right|}$
 
 The first term works to minimise the energy, and the second ensures the wavefunction is normaliseable, and the third to impose Dirichlet boundary conditions. The hyperparameters, $({\alpha,\beta,\gamma})$ regulate the loss. It should be noted if we know any specific symmetries of the Hamiltonian we may change the loss to account for them.
 
