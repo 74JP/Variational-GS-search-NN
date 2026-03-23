@@ -12,9 +12,11 @@ This seems exactly like a Machine Learning problem, and since Neural Networks ar
 
 ## The Neural Network
 A wide and deep enough NN should be able to approximate any reasonable function, if anything at the cost of interpretability. Moreover, the training is easy enough. We introduce a physics and minimisation loss as:
+
 $\cal{L}(\vec{\lambda}) = \alpha*\frac{|\bra{f_{\vec{\lambda}}(\vec{r})} \hat{H} \ket{f_{\vec{\lambda}}(\vec{r})}|^2}{|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}|^2} + 
 {\beta}*(|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}| -1)^2 + 
 \gamma*\frac{|f_{\vec{\lambda}}({\partial D})|^2}{|\langle{f_{\vec{\lambda}}(\vec{r})}\ket{f_{\vec{\lambda}}(\vec{r})}|}$
+
 Where the first term works to minimise the energy, and the second ensures the wavefunction is normaliseable, and the third to impose Dirichlet boundary conditions. The hyperparameters, $({\alpha,\beta,\gamma})$ regulate the loss. It should be noted if we know any specific symmetries of the Hamiltonian we may change the loss to account for them.
 
 The network used is a MLP with tanh activation layers. The width and depth of the network has been arbitrarily chosen for the most part. The only non arbitrary elements are the following:
