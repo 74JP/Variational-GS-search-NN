@@ -150,12 +150,12 @@ class cust_loss():
         #energy loss
         norm = self.get_norm()
         energy = self.get_energy()
-        bc1 = self.f(self.domain[0].unsqueeze(-1))/norm
-        bc2 = self.f(self.domain[1].unsqueeze(-1))/norm
+        bc1 = self.f(self.domain[0].unsqueeze(-1))**2/norm
+        bc2 = self.f(self.domain[1].unsqueeze(-1))**2/norm
         #enforcing boundary conditions:
         #psi ->0 at +- infinity or domain edges
 
-        bc_loss = self.bc_weight*(bc1**2+bc2**2)
+        bc_loss = self.bc_weight*(bc1+bc2)
         energy_loss = self.e_weight*energy**2
         norm_loss = self.norm_weight*(norm-1)**2
 
